@@ -8,7 +8,7 @@ const detranDF = require('./controllers/detran/detranDF');
 
 const app = express();
 
-app.use(cors(/*{origin: 'https://www.companyconferi.com.br/'}*/));
+app.use(cors({origin: 'https://www.companyconferi.com.br/'}));
 //HOME
 app.get('/', (req,res) => {
     res.sendFile(__dirname + '/view/index.html');
@@ -41,6 +41,16 @@ app.get('/detran/DF/:placa/:renavam', (req,res) => {
         res.json({'retorno': 0, 'Mensagem': 'Sem retorno'});
     })
 });
+
+//ROTA DETRAN MS
+app.get('/detran/MS/:placa/:renavam', (req,res) => {
+    detranMS(req.params.placa, req.params.renavam).then((ret) => {
+        res.json(ret);
+    }).catch(() => {
+        res.json({'retorno': 0, 'Mensagem': 'Sem retorno'});
+    })
+});
+
 //ROTA NOTA FISCAL
 app.get('/notaFiscal/emissao', (req,res) => {
         retornoDados = {
