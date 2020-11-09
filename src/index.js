@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mail = require('./controllers/nfs/mail');
 const nota = require('./controllers/nfs/nota');
 
@@ -7,6 +8,7 @@ const detranDF = require('./controllers/detran/detranDF');
 
 const app = express();
 
+app.use(cors({origin: 'https://www.companyconferi.com.br/'}));
 //HOME
 app.get('/', (req,res) => {
     res.sendFile(__dirname + '/view/index.html');
