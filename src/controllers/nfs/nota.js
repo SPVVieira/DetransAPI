@@ -3,7 +3,7 @@ const nota = async function notaFiscal(res){
     //Cria um navegador do tipo Chromium
     const browser = await puppeteer.launch({
         headless: true,
-        args: ['--disable-notifications', '--no-sandbox']
+        args: ['--disable-notifications', '--no-sandbox', '--disable-setuid-sandbox']
     });
     //Cria uma nova aba com tamanho especificado se quiser fazer por imagem
     const page = await browser.newPage();
