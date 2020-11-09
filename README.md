@@ -19,6 +19,6 @@ npm install
 
 <!-- After this make sure that the file package.json id configured in the start command (in the module "scripts") -->
 
-"start": "node -r dotenv/config index.js"
+"start": "node index.js"
 
 <!-- Well, your API is done to deploy -->
