@@ -1,3 +1,7 @@
 node_modules
 .env_sample
 README.md
+pdf/*
+!pdf/laudos/.gitkeep
+!pdf/consultas/.gitkeep
+!pdf/nfs/.gitkeep
