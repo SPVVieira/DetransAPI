@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 async function detranMS(placa, renavam) {
     const browser = await puppeteer.launch({
         headless: false,
-        args: ['--disable-notifications', '--no-sandbox'],
+        args: ['--disable-notifications', '--no-sandbox', '--disable-setuid-sandbox'],
         ignoreDefaultArgs: ['--mute-audio']
     });
     const page = await browser.newPage();
