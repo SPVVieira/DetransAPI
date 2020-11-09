@@ -1,0 +1,16 @@
+{
+  "name": "companyapi",
+  "version": "1.0.0",
+  "description": "Automation for Company Conferi",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "Victor Vieira",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemailer": "^6.4.13",
+    "puppeteer": "^5.3.1"
+  }
+}

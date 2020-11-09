@@ -1,0 +1,14 @@
+.cabecalho {
+    text-align: center;
+    color: darkblue;
+}
+
+.conteudo {
+    text-align: center;
+    color: black;
+    font-size: 21px;
+}
+
+.links {
+    font-weight: bold;
+}
