@@ -53,7 +53,7 @@ app.get('/detran/MS/:placa/:renavam', (req,res) => {
 
 //ROTA NOTA FISCAL
 app.get('/notaFiscal/emissao', (req,res) => {
-        retornoDados = {
+        /*retornoDados = {
             'codigoCliente': '123',
             'empresaCadastro': 'CREDCOMPANY',
             'tipoDocumento': 'CPF',
@@ -72,8 +72,8 @@ app.get('/notaFiscal/emissao', (req,res) => {
             'valor': '100,00',
             'valorTributado': '18,45',
             'aliquota': '3,34'
-        };
-        nota(retornoDados).then((result)=>{
+        };*/
+        /*nota(retornoDados).then((result)=>{
             mail(result, retornoDados).then((respostaEmail) => {
                 if(respostaEmail.accepted == retornoDados.email){
                     res.send({"retorno": 1, "Resposta": "Email enviado"});
@@ -89,7 +89,7 @@ app.get('/notaFiscal/emissao', (req,res) => {
         }).catch((err) => {
             console.log("ERRO EMISSÃO NOTA: " + err);
             res.send({"retorno": 0, "Resposta": "Falha na emissao da nota"});
-        });
+        });*/
 });
 
 var port = process.env.PORT || 3000;
