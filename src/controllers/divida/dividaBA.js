@@ -23,15 +23,16 @@ const dividaBA = async (placa, renavam) => {
         });
         return retornoConsulta;
     }).then((res) => {
-        retorno = {'status': 1, res};
+        retorno = {'status': 1, 'retorno': res};
     }).catch((err) => {
-        retorno = {'status': 0, err};
+        retorno = {'status': 0, 'retorno': err};
     });
+    
     await page.waitForTimeout(1000);
     regexPlaca = /[A-z]{3}[\s\-]?[0-9]{1}[A-z0-9]{1}[0-9]{2}/;
     regexValor = /R[\$][\s]?[0-9\.]{1,10}[\,][0-9]{2}/;
     regexData = /[0-9]{2}[\/][0-9]{2}[\/][0-9]{2,4}/;
-    retornoBA = {'placa': regexPlaca.exec(retorno[0])[0], 'marcaModelo': retorno[1], 'valorPrincipal': regexValor.exec(retorno[2])[0], 'acrescimo': regexValor.exec(retorno[3])[0], 'cotaUnica': regexValor.exec(retorno[4])[0], 'primeiraParcela': regexData.exec(retorno[5])[0], 'segundaParcela': regexData.exec(retorno[6])[0], 'terceiraParcela': regexData.exec(retorno[7])[0], 'cotaUnicaAnterior': regexValor.exec(retorno[8])[0]};
+    retornoBA = {'status': retorno.status, 'retorno':{'placa': regexPlaca.exec(retorno.retorno[0])[0], 'marcaModelo': retorno.retorno[1], 'valorPrincipal': regexValor.exec(retorno.retorno[2])[0], 'acrescimo': regexValor.exec(retorno.retorno[3])[0], 'cotaUnica': regexValor.exec(retorno.retorno[4])[0], 'primeiraParcela': regexData.exec(retorno.retorno[5])[0], 'segundaParcela': regexData.exec(retorno.retorno[6])[0], 'terceiraParcela': regexData.exec(retorno.retorno[7])[0], 'cotaUnicaAnterior': regexValor.exec(retorno.retorno[8])[0]}};
     await page.close();
     await browser.close();
     return retornoBA;
