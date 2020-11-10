@@ -6,31 +6,33 @@ const detranDF = require('./controllers/detran/detranDF');
 const detranMS = require('./controllers/detran/detranMS');
 
 const app = express();
-
-app.use(cors({origin: 'https://www.companyconferi.com.br/'}));
+var corsOptions = {
+    origin: ['179.188.51.20', '187.95.162.30'],
+    optionsSuccessStatus: 200
+}
 
 //HOME
-app.get('/', (req,res) => {
+app.get('/', cors(corsOptions), (req,res) => {
     res.sendFile(__dirname + '/view/index.html');
 });
 
 //EXPLICAÇÃO NOTA 
-app.get('/notaFiscal', (req,res) => {
+app.get('/notaFiscal', cors(corsOptions), (req,res) => {
     res.sendFile(__dirname + '/view/notaFiscal.html');
 });
 
 //EXPLICAÇÃO DETRAN
-app.get('/detran', (req,res) => {
+app.get('/detran', cors(corsOptions), (req,res) => {
     res.sendFile(__dirname + '/view/detran.html');
 });
 
 //EXPLICAÇÃO DIVIDA
-app.get('/dividaAtiva', (req,res) => {
+app.get('/dividaAtiva', cors(corsOptions), (req,res) => {
     res.sendFile(__dirname + '/view/dividaAtiva.html');
 });
 
 //ROTA DIVIDA BA
-app.get('/dividaAtiva/BA/:placa/:renavam', (req,res) => {
+app.get('/dividaAtiva/BA/:placa/:renavam', cors(corsOptions), (req,res) => {
     dividaBA(req.params.placa, req.params.renavam).then((ret) => {
         res.json(ret);
     }).catch(() => {
@@ -39,7 +41,7 @@ app.get('/dividaAtiva/BA/:placa/:renavam', (req,res) => {
 });
 
 //ROTA DETRAN DF
-app.get('/detran/DF/:placa/:renavam', (req,res) => {
+app.get('/detran/DF/:placa/:renavam', cors(corsOptions), (req,res) => {
     detranDF(req.params.placa, req.params.renavam).then((ret) => {
         res.json(ret);
     }).catch(() => {
@@ -48,7 +50,7 @@ app.get('/detran/DF/:placa/:renavam', (req,res) => {
 });
 
 //ROTA DETRAN MS
-app.get('/detran/MS/:placa/:renavam', (req,res) => {
+app.get('/detran/MS/:placa/:renavam', cors(corsOptions), (req,res) => {
     detranMS(req.params.placa, req.params.renavam).then((ret) => {
         res.json(ret);
     }).catch(() => {

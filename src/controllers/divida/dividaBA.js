@@ -23,9 +23,9 @@ const dividaBA = async (placa, renavam) => {
         });
         return retornoConsulta;
     }).then((res) => {
-        retorno = res;
+        retorno = {'status': 1, res};
     }).catch((err) => {
-        retorno = err;
+        retorno = {'status': 0, err};
     });
     await page.waitForTimeout(1000);
     regexPlaca = /[A-z]{3}[\s\-]?[0-9]{1}[A-z0-9]{1}[0-9]{2}/;
