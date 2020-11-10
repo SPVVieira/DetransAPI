@@ -64,17 +64,24 @@ const detranMS = async (placa, renavam) => {
         };
 
         return {
+            'status' : 1,
+            'mensagem': 'Retorno ok',
             'dadosVeiculo': objDadosVeiculo,
             'debitosVeiculo': objDebitos
         }
     }).then((retornoVeiculo) => {
-        console.log(retornoVeiculo);
+        retornoMS = retornoVeiculo;
     }).catch((err) => {
         console.log('ERRO ' + err);
-    })
+        retornoMS = {
+            'status' : 0,
+            'mensagem': 'Sem retorno'
+        }
+    });
     await page.waitForTimeout(500);
     await page.close();
     await browser.close();
+    return retornoMS;
 }
 
 module.exports = detranMS;
