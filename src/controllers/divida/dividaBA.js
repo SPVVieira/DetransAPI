@@ -23,9 +23,9 @@ const dividaBA = async (placa, renavam) => {
         });
         return retornoConsulta;
     }).then((res) => {
-        retorno = {'status': 1, 'retorno': res};
+        retorno = {'status': 1, 'mensagem': 'Retorno OK', 'retorno': res};
     }).catch((err) => {
-        retorno = {'status': 0, 'retorno': err};
+        retorno = {'status': 0, 'mensagem': 'Sem retorno', 'retorno': err};
     });
     
     await page.waitForTimeout(1000);

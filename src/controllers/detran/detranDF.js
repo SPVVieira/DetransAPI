@@ -217,14 +217,14 @@ const detranDF = async (placa, renavam) => {
         }
         retornoRecurso = {'status': recursoStatus, 'retorno': retRecurso};
         
-        return {'retorno': 1, 'mensagem': 'Retorno ok', 'dadosVeiculo': dadosVeiculo, 'infoUltimoLicenciamento': informacoesUltLicenc, 'debitosVeiculo': retornoDebitosVeiculo, 'infracoes': retornoInfracoes, 'recursosInfracao': retornoRecurso};
+        return {'status': 1, 'mensagem': 'Retorno ok', 'dadosVeiculo': dadosVeiculo, 'infoUltimoLicenciamento': informacoesUltLicenc, 'debitosVeiculo': retornoDebitosVeiculo, 'infracoes': retornoInfracoes, 'recursosInfracao': retornoRecurso};
          
     }).then((retorno1) => {
         fechaPageBrowser();
         retorno = (retorno1);
     }).catch(() => {
         fechaPageBrowser();
-        retorno = {'retorno': 0, 'mensagem': 'Sem retorno'};
+        retorno = {'status': 0, 'mensagem': 'Sem retorno'};
     });
 
     function fechaPageBrowser(){
