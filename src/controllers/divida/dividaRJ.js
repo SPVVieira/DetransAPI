@@ -51,20 +51,20 @@ const dividaRJ = async (placa, renavam) => {
         const frame3 = await buscaFrames2.find(f => f.name() === 'WA0');
         await frame3.evaluate(() => {
             retornoDebitos = [];
-            retornaDetalDeb = [];
             if(document.querySelectorAll('tr#ITR54')[0]){
                 document.querySelectorAll('tr#ITR54')[0].querySelectorAll('span#TEXTGRID55 > table > tbody > tr > td').forEach(element => {
                     retornoDebitos.push(element.innerText.trim());
                 });
-                i = 6;
-                while(i < retornoDebitos.length) {
-                    retornaDetalDeb.push({'certidao': retornoDebitos[i], 'situacao': retornoDebitos[i + 1], 'natureza': retornoDebitos[i + 2], 'debitos': retornoDebitos[i + 3], 'horario': retornoDebitos[i + 4], 'total': retornoDebitos[i + 5]});
-                    i = i + 6;
-                }
             }
             return retornoDebitos;
         }).then((resp) => {
-            retornoFinal = {'status': 1, 'mensagem': "Retorno ok", 'retorno': resp};
+            i = 6;      
+            retornaDetalDeb = [];
+            while(i < resp.length) {
+                retornaDetalDeb.push({'certidao': resp[i], 'situacao': resp[i + 1], 'natureza': resp[i + 2], 'debitos': resp[i + 3], 'horario': resp[i + 4], 'total': resp[i + 5]});
+                i = i + 6;
+            }
+            retornoFinal = {'status': 1, 'mensagem': "Retorno ok", 'retorno': retornaDetalDeb};
         }).catch(() => {
             retornoFinal = {'status': 2, 'mensagem': "ERRO, ENTRAR EM CONTATO COM TI"};
         })
