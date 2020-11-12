@@ -36,7 +36,8 @@ app.get('/dividaAtiva', cors(corsOptions), (req,res) => {
 app.get('/dividaAtiva/BA/:placa/:renavam', cors(corsOptions), (req,res) => {
     dividaBA(req.params.placa, req.params.renavam).then((ret) => {
         res.json(ret);
-    }).catch(() => {
+    }).catch((err) => {
+        console.log(err);
         res.json({'status': 0, 'Mensagem': 'Sem retorno'});
     })
 });
@@ -45,7 +46,8 @@ app.get('/dividaAtiva/BA/:placa/:renavam', cors(corsOptions), (req,res) => {
 app.get('/dividaAtiva/RJ/:placa/:renavam', cors(corsOptions), (req,res) => {
     dividaRJ(req.params.placa, req.params.renavam).then((ret) => {
         res.json(ret);
-    }).catch(() => {
+    }).catch((err) => {
+        console.log(err);
         res.json({'status': 0, 'Mensagem': 'Sem retorno'});
     })
 });
@@ -54,7 +56,8 @@ app.get('/dividaAtiva/RJ/:placa/:renavam', cors(corsOptions), (req,res) => {
 app.get('/detran/DF/:placa/:renavam', cors(corsOptions), (req,res) => {
     detranDF(req.params.placa, req.params.renavam).then((ret) => {
         res.json(ret);
-    }).catch(() => {
+    }).catch((err) => {
+        console.log(err);
         res.json({'status': 0, 'Mensagem': 'Sem retorno'});
     })
 });
@@ -63,7 +66,8 @@ app.get('/detran/DF/:placa/:renavam', cors(corsOptions), (req,res) => {
 app.get('/detran/MS/:placa/:renavam', cors(corsOptions), (req,res) => {
     detranMS(req.params.placa, req.params.renavam).then((ret) => {
         res.json(ret);
-    }).catch(() => {
+    }).catch((err) => {
+        console.log(err);
         res.json({'status': 0, 'Mensagem': 'Sem retorno'});
     })
 });
