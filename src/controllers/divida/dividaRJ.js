@@ -62,7 +62,7 @@ const dividaRJ = async (placa, renavam) => {
                     i = i + 6;
                 }
             }
-            return retornaDetalDeb;
+            return retornoDebitos;
         }).then((resp) => {
             retornoFinal = {'status': 1, 'mensagem': "Retorno ok", 'retorno': resp};
         }).catch(() => {
