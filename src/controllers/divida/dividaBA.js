@@ -2,11 +2,11 @@ puppeteer = require('puppeteer');
 
 const dividaBA = async (placa, renavam) => {
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
         args: ['--disable-notifications', '--no-sandbox', '--disable-setuid-sandbox']
     });
     const page = await browser.newPage();
-    await page.goto('https://www.sefaz.ba.gov.br/scripts/ipva/ipva.asp');
+    await page.goto('https://www.sefaz.ba.gov.br/scripts/ipva/ipva.asp', {waitUntil:'networkidle2'});
     await page.type('input.input', renavam);
     await page.evaluate(()=> {
         document.querySelectorAll('input')[1].className="botao";

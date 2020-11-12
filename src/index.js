@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const dividaBA = require('./controllers/divida/dividaBA');
+const dividaRJ = require('./controllers/divida/dividaRJ');
 const detranDF = require('./controllers/detran/detranDF');
 const detranMS = require('./controllers/detran/detranMS');
 
@@ -34,6 +35,15 @@ app.get('/dividaAtiva', cors(corsOptions), (req,res) => {
 //ROTA DIVIDA BA
 app.get('/dividaAtiva/BA/:placa/:renavam', cors(corsOptions), (req,res) => {
     dividaBA(req.params.placa, req.params.renavam).then((ret) => {
+        res.json(ret);
+    }).catch(() => {
+        res.json({'status': 0, 'Mensagem': 'Sem retorno'});
+    })
+});
+
+//ROTA DIVIDA RJ
+app.get('/dividaAtiva/RJ/:placa/:renavam', cors(corsOptions), (req,res) => {
+    dividaRJ(req.params.placa, req.params.renavam).then((ret) => {
         res.json(ret);
     }).catch(() => {
         res.json({'status': 0, 'Mensagem': 'Sem retorno'});
