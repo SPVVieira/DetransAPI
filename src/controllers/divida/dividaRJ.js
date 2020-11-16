@@ -36,14 +36,14 @@ const dividaRJ = async (placa, renavam) => {
     const status = await frame2.$('td.STATUSBARCell');
     await status.evaluate(() => {
         if(document.querySelectorAll('a.STATUSBARCell')[0] && document.querySelectorAll('a.STATUSBARCell')[0].innerText.trim() == 'RENAVAM não inscrito em Dívida Ativa'){
-            return {'status': 0, 'mensagem': document.querySelectorAll('a.STATUSBARCell')[0].innerText.trim()};
+            return {'status': 1, 'mensagem': document.querySelectorAll('a.STATUSBARCell')[0].innerText.trim()};
         }else{
             return {'status': 1, 'mensagem': "Consta inscrição em dívida ativa"};
         }
     }).then((resp) => {
         retornostatus = resp;
     }).catch(() => {
-        retornostatus = {'status': 2, 'mensagem': "ERRO, ENTRAR EM CONTATO COM TI"};
+        retornostatus = {'status': 0, 'mensagem': "ERRO, ENTRAR EM CONTATO COM TI"};
     });
     if(retornostatus && retornostatus.status == 0) {
         retornoFinal = retornostatus;
@@ -66,7 +66,7 @@ const dividaRJ = async (placa, renavam) => {
             }
             retornoFinal = {'status': 1, 'mensagem': "Retorno ok", 'retorno': retornaDetalDeb};
         }).catch(() => {
-            retornoFinal = {'status': 2, 'mensagem': "ERRO, ENTRAR EM CONTATO COM TI"};
+            retornoFinal = {'status': 0, 'mensagem': "ERRO, ENTRAR EM CONTATO COM TI"};
         });
     }else if (retornostatus && retornostatus.status == 2) {
         retornoFinal = retornostatus;
