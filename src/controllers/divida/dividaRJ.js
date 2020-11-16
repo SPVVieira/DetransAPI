@@ -24,15 +24,15 @@ const dividaRJ = async (placa, renavam) => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(500);
     const campoRenavam = await frame2.$('input#F_93');
     await campoRenavam.type(renavam, {delay: 50});
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(1000);
     const BotaoPesquisar = await frame2.$('img#ICONIMG112');
     await BotaoPesquisar.click({
         button:'left'
     });
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(500);
     const status = await frame2.$('td.STATUSBARCell');
     await status.evaluate(() => {
         if(document.querySelectorAll('a.STATUSBARCell')[0] && document.querySelectorAll('a.STATUSBARCell')[0].innerText.trim() == 'RENAVAM não inscrito em Dívida Ativa'){
@@ -45,7 +45,6 @@ const dividaRJ = async (placa, renavam) => {
     }).catch(() => {
         retornostatus = {'status': 2, 'mensagem': "ERRO, ENTRAR EM CONTATO COM TI"};
     });
-    await page.waitForTimeout(2000);
     if(retornostatus && retornostatus.status == 0) {
         retornoFinal = retornostatus;
     }else if (retornostatus && retornostatus.status == 1) {
@@ -62,13 +61,13 @@ const dividaRJ = async (placa, renavam) => {
             i = 6;      
             retornaDetalDeb = [];
             while(i < resp.length) {
-                retornaDetalDeb.push({'certidao': resp[i], 'situacao': resp[i + 1], 'natureza': resp[i + 2], 'debitos': resp[i + 3], 'horario': resp[i + 4], 'total': resp[i + 5]});
+                retornaDetalDeb.push({'certidao': resp[i], 'situacao': resp[i + 1], 'natureza': resp[i + 2], 'debitos': resp[i + 3], 'honorarios': resp[i + 4], 'total': resp[i + 5]});
                 i = i + 6;
             }
             retornoFinal = {'status': 1, 'mensagem': "Retorno ok", 'retorno': retornaDetalDeb};
         }).catch(() => {
             retornoFinal = {'status': 2, 'mensagem': "ERRO, ENTRAR EM CONTATO COM TI"};
-        })
+        });
     }else if (retornostatus && retornostatus.status == 2) {
         retornoFinal = retornostatus;
     }
