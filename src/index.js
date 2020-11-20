@@ -32,10 +32,10 @@ app.get('/dividaAtiva', cors(corsOptions), (req,res) => {
 app.get('/dividaAtiva/BA/:placa/:renavam', cors(corsOptions), (req,res) => {
     const dividaBA = require('./controllers/divida/dividaBA');
     dividaBA(req.params.placa, req.params.renavam).then((ret) => {
-        res.json(ret);
+        return res.json(ret);
     }).catch((err) => {
         console.log(err);
-        res.json({'status': 0, 'Mensagem': 'Sem retorno'});
+        return res.json({'status': 0, 'Mensagem': 'Sem retorno'});
     })
 });
 
@@ -43,10 +43,10 @@ app.get('/dividaAtiva/BA/:placa/:renavam', cors(corsOptions), (req,res) => {
 app.get('/dividaAtiva/RJ/:placa/:renavam', cors(corsOptions), (req,res) => {
     const dividaRJ = require('./controllers/divida/dividaRJ');
     dividaRJ(req.params.placa, req.params.renavam).then((ret) => {
-        res.json(ret);
+        return res.json(ret);
     }).catch((err) => {
         console.log(err);
-        res.json({'status': 0, 'Mensagem': 'Sem retorno'});
+        return res.json({'status': 0, 'Mensagem': 'Sem retorno'});
     })
 });
 
@@ -54,10 +54,10 @@ app.get('/dividaAtiva/RJ/:placa/:renavam', cors(corsOptions), (req,res) => {
 app.get('/detran/DF/:placa/:renavam', cors(corsOptions), (req,res) => {
     const detranDF = require('./controllers/detran/detranDF');
     detranDF(req.params.placa, req.params.renavam).then((ret) => {
-        res.json(ret);
+        return res.json(ret);
     }).catch((err) => {
         console.log(err);
-        res.json({'status': 0, 'Mensagem': 'Sem retorno'});
+        return res.json({'status': 0, 'Mensagem': 'Sem retorno'});
     })
 });
 
@@ -65,10 +65,10 @@ app.get('/detran/DF/:placa/:renavam', cors(corsOptions), (req,res) => {
 app.get('/detran/MS/:placa/:renavam', cors(corsOptions), (req,res) => {
     const detranMS = require('./controllers/detran/detranMS');
     detranMS(req.params.placa, req.params.renavam).then((ret) => {
-        res.json(ret);
+        return res.json(ret);
     }).catch((err) => {
         console.log(err);
-        res.json({'status': 0, 'Mensagem': 'Sem retorno'});
+        return res.json({'status': 0, 'Mensagem': 'Sem retorno'});
     })
 });
 
