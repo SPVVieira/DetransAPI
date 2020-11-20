@@ -51,7 +51,7 @@ app.get('/dividaAtiva/RJ/:placa/:renavam', cors(corsOptions), (req,res) => {
 });
 
 //ROTA DETRAN DF
-app.get('/detran/DF/:placa/:renavam', cors(corsOptions), (req,res) => {
+app.get('/detran/DF/:placa/:renavam', cors(corsOptions), (req,res,next) => {
     const detranDF = require('./controllers/detran/detranDF');
     detranDF(req.params.placa, req.params.renavam).then((ret) => {
         return res.json(ret);
@@ -59,10 +59,11 @@ app.get('/detran/DF/:placa/:renavam', cors(corsOptions), (req,res) => {
         console.log(err);
         return res.json({'status': 0, 'Mensagem': 'Sem retorno'});
     })
+    next();
 });
 
 //ROTA DETRAN MS
-app.get('/detran/MS/:placa/:renavam', cors(corsOptions), (req,res) => {
+app.get('/detran/MS/:placa/:renavam', cors(corsOptions), (req,res,next) => {
     const detranMS = require('./controllers/detran/detranMS');
     detranMS(req.params.placa, req.params.renavam).then((ret) => {
         return res.json(ret);
@@ -70,6 +71,7 @@ app.get('/detran/MS/:placa/:renavam', cors(corsOptions), (req,res) => {
         console.log(err);
         return res.json({'status': 0, 'Mensagem': 'Sem retorno'});
     })
+    next();
 });
 
 var port = process.env.PORT || 3000;
