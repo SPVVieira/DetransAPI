@@ -1,7 +1,13 @@
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require("body-parser");
 
 const app = express();
+const router = express.Router();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 var corsOptions = {
     origin: ['179.188.51.20', '187.95.162.30'],
     optionsSuccessStatus: 200
@@ -63,9 +69,9 @@ app.get('/detran/DF/:placa/:renavam', cors(corsOptions), (req,res,next) => {
 });
 
 //ROTA DETRAN MS
-app.get('/detran/MS/:placa/:renavam', cors(corsOptions), async (req,res) => {
+app.get('/detran/MS', cors(corsOptions), async (req,res) => {
     const detranMS = require('./controllers/detran/detranMS');
-    await detranMS(req.params.placa, req.params.renavam).then((ret) => {
+    await detranMS(req.query.placa, req.query.renavam).then((ret) => {
         retorno = ret;
     }).catch((err) => {
         console.log(err);
