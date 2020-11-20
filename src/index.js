@@ -63,15 +63,16 @@ app.get('/detran/DF/:placa/:renavam', cors(corsOptions), (req,res,next) => {
 });
 
 //ROTA DETRAN MS
-app.get('/detran/MS/:placa/:renavam', cors(corsOptions), (req,res,next) => {
+app.get('/detran/MS/:placa/:renavam', cors(corsOptions), async (req,res) => {
     const detranMS = require('./controllers/detran/detranMS');
-    detranMS(req.params.placa, req.params.renavam).then((ret) => {
-        return res.json(ret);
+    await detranMS(req.params.placa, req.params.renavam).then((ret) => {
+        retorno = ret;
     }).catch((err) => {
         console.log(err);
-        return res.json({'status': 0, 'Mensagem': 'Sem retorno'});
-    })
-    next();
+        retorno = {'status': 0, 'Mensagem': 'Sem retorno'};
+    });
+    return res.json(retorno);
+
 });
 
 var port = process.env.PORT || 3000;
