@@ -1,12 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require("body-parser");
 
 const app = express();
-const router = express.Router();
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 var corsOptions = {
     origin: ['179.188.51.20', '187.95.162.30'],
@@ -34,51 +29,34 @@ app.get('/dividaAtiva', cors(corsOptions), (req,res) => {
     res.sendFile(__dirname + '/view/dividaAtiva.html');
 });
 
-//ROTA DIVIDA BA
-app.get('/dividaAtiva/BA/:placa/:renavam', cors(corsOptions), (req,res) => {
-    const dividaBA = require('./controllers/divida/dividaBA');
-    dividaBA(req.params.placa, req.params.renavam).then((ret) => {
-        return res.json(ret);
-    }).catch((err) => {
-        console.log(err);
-        return res.json({'status': 0, 'Mensagem': 'Sem retorno'});
-    })
-});
+app.get('/:consulta/:uf', cors(corsOptions), async (req,res) => {
+    const { consulta, uf } = req.params;
+    const { placa, renavam } = req.query;
 
-//ROTA DIVIDA RJ
-app.get('/dividaAtiva/RJ/:placa/:renavam', cors(corsOptions), (req,res) => {
-    const dividaRJ = require('./controllers/divida/dividaRJ');
-    dividaRJ(req.params.placa, req.params.renavam).then((ret) => {
-        return res.json(ret);
-    }).catch((err) => {
-        console.log(err);
-        return res.json({'status': 0, 'Mensagem': 'Sem retorno'});
-    })
-});
+    if(consulta == 'detran') {
+        if(uf == 'MS') {
+            navega = require('./controllers/detran/detranMS');
+        }else if(uf == 'DF') {
+            navega = require('./controllers/detran/detranDF');
+        }
+    }else if(consulta == 'divida') {
+        if(uf == 'BA') {
+            navega = require('./controllers/divida/dividaBA');
+        }else if(uf == 'RJ') {
+            navega = require('./controllers/divida/dividaRJ');
+        }
+    }
 
-//ROTA DETRAN DF
-app.get('/detran/DF/:placa/:renavam', cors(corsOptions), (req,res,next) => {
-    const detranDF = require('./controllers/detran/detranDF');
-    detranDF(req.params.placa, req.params.renavam).then((ret) => {
-        return res.json(ret);
-    }).catch((err) => {
-        console.log(err);
-        return res.json({'status': 0, 'Mensagem': 'Sem retorno'});
-    })
-    next();
-});
-
-//ROTA DETRAN MS
-app.get('/detran/MS', cors(corsOptions), async (req,res) => {
-    const detranMS = require('./controllers/detran/detranMS');
-    await detranMS(req.query.placa, req.query.renavam).then((ret) => {
-        retorno = ret;
-    }).catch((err) => {
-        console.log(err);
-        retorno = {'status': 0, 'Mensagem': 'Sem retorno'};
-    });
-    return res.json(retorno);
-
+    if(!placa && !renavam) {
+        return res.json({'status': 0, 'mensagem': 'falta parâmetro placa ou renavam'});
+    }else if(!placa) {
+        return res.json({'status': 0, 'mensagem': 'falta parâmetro placa'});
+    }else if(!renavam) {
+        return res.json({'status': 0, 'mensagem': 'falta parâmetro renavam'});
+    }else{
+        const retorno = await navega(placa, renavam);
+        return res.json(retorno);
+    }
 });
 
 var port = process.env.PORT || 3000;
