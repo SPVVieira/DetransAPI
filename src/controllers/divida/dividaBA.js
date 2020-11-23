@@ -2,7 +2,7 @@ puppeteer = require('puppeteer');
 
 const dividaBA = async (placa, renavam) => {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: ['--disable-notifications', '--no-sandbox', '--disable-setuid-sandbox']
     });
     const page = await browser.newPage();
