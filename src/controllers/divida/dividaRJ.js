@@ -7,13 +7,13 @@ const dividaRJ = async (placa, renavam) => {
     });
     const page = await browser.newPage();
     await page.goto('http://www.consultadividaativa.rj.gov.br/RDGWEBLNX/servlet/StartCISPage?PAGEURL=/cisnatural/NatLogon.html&xciParameters.natsession=Consulta_Debitos_DA', {waitUntil:'networkidle2'});
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2000);
     await page.waitForSelector('iframe#WA1');
     const buscaFrames = await page.frames();
     const frame1 = buscaFrames.find(f => f.name() === 'WA1');
     const botaoAvancar = await frame1.$('img#ICONIMG47');
     await botaoAvancar.click();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2000);
     const buscaFrames2 = await page.frames();
     const frame2 = buscaFrames2.find(f => f.name() === 'WA2');
     const selectParam = await frame2.$('select#CDYN_37');
@@ -24,15 +24,15 @@ const dividaRJ = async (placa, renavam) => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(1500);
     const campoRenavam = await frame2.$('input#F_93');
     await campoRenavam.type(renavam, {delay: 50});
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(1500);
     const BotaoPesquisar = await frame2.$('img#ICONIMG112');
     await BotaoPesquisar.click({
         button:'left'
     });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(2000);
     const status = await frame2.$('td.STATUSBARCell');
     await status.evaluate(() => {
         if(document.querySelectorAll('a.STATUSBARCell')[0] && document.querySelectorAll('a.STATUSBARCell')[0].innerText.trim() == 'RENAVAM não inscrito em Dívida Ativa'){
