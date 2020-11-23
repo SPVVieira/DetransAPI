@@ -32,7 +32,7 @@ const dividaRJ = async (placa, renavam) => {
     await BotaoPesquisar.click({
         button:'left'
     });
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
     const status = await frame2.$('td.STATUSBARCell');
     await status.evaluate(() => {
         if(document.querySelectorAll('a.STATUSBARCell')[0] && document.querySelectorAll('a.STATUSBARCell')[0].innerText.trim() == 'RENAVAM não inscrito em Dívida Ativa'){
