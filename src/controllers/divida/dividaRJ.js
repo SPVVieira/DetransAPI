@@ -46,7 +46,7 @@ const dividaRJ = async (placa, renavam) => {
         retornostatus = {'status': 0, 'mensagem': "ERRO, ENTRAR EM CONTATO COM TI"};
     });
     if(retornostatus && retornostatus.status == 0) {
-        retornoFinal = retornostatus;
+        retornoFinal = {'status': 1, 'mensagem': retornostatus.mensagem};
     }else if (retornostatus && retornostatus.status == 1) {
         const frame3 = await buscaFrames2.find(f => f.name() === 'WA0');
         await frame3.evaluate(() => {
