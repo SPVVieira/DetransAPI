@@ -64,7 +64,11 @@ const dividaRJ = async (placa, renavam) => {
                 retornaDetalDeb.push({'certidao': resp[i], 'situacao': resp[i + 1], 'natureza': resp[i + 2], 'debitos': resp[i + 3], 'honorarios': resp[i + 4], 'total': resp[i + 5]});
                 i = i + 6;
             }
-            retornoFinal = {'status': 1, 'mensagem': "Retorno ok", 'retorno': retornaDetalDeb};
+            if(retornaDetalDeb[0].certidao){
+                retornoFinal = {'status': 1, 'mensagem': "Retorno ok", 'retorno': retornaDetalDeb};
+            }else{
+                retornoFinal = {'status': 0, 'mensagem': "Retorno ok", 'retorno': 'Puxar novamente'};
+            }
         }).catch(() => {
             retornoFinal = {'status': 0, 'mensagem': "ERRO, ENTRAR EM CONTATO COM TI"};
         });
