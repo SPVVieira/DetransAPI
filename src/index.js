@@ -39,7 +39,7 @@ app.get('/:consulta/:uf', cors(corsOptions), async (req,res) => {
         }else if(uf == 'DF') {
             navega = require('./controllers/detran/detranDF');
         }
-    }else if(consulta == 'divida') {
+    }else if(consulta == 'dividaAtiva') {
         if(uf == 'BA') {
             navega = require('./controllers/divida/dividaBA');
         }else if(uf == 'RJ') {
