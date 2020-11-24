@@ -103,7 +103,6 @@ const detranMT = async (placa, renavam) => {
                     }
                 });
                 autuacoes = {'status': 1, 'mensagem': 'Consta(m) infração(ões)', 'retorno': arrayAutuacao};
-    
             }
     
             //Multas
@@ -259,7 +258,6 @@ const detranMT = async (placa, renavam) => {
             return {'dadosVeiculo': dadosVeic, 'debitosVeiculo': debitosVeic, 'autuacoes': autuacoes, 'multas': multas, 'multasConveniadas': multasConveniados, 'recursos': recursos, 'ultimoProcessos': ultimosProcessos, 'recall': recall, 'historicoImpedimento': historicoImpedimentos};
         }).then((ret) => {
             retornoConsulta = {'status': 1, 'retorno': ret};
-    
         }).catch((err) => {
             retornoConsulta = {'status': 0, 'mensagem': err, 'retorno': 'Sem retorno'};
         });
@@ -274,15 +272,14 @@ const detranMT = async (placa, renavam) => {
             }
         }).then((ret) => {
             if(ret == 1){
-                retornoConsulta = {'status': 1, 'retorno': 'Veículo não cadastrado no estado'};
+                retornoConsulta = {'status': 1, 'mensagem': 'Veículo não cadastrado no estado', 'retorno': 'Veículo não cadastrado no estado'};
             }else{
-                retornoConsulta = {'status': 0, 'retorno': 'Erro contatar TI'};
+                retornoConsulta = {'status': 0, 'mensagem': 'Erro contatar TI', 'retorno': 'Erro contatar TI'};
             }
         }).catch(() => {
-            retornoConsulta = {'status': 0, 'retorno': 'Erro contatar TI'};
+            retornoConsulta = {'status': 0, 'mensagem': 'Erro contatar TI', 'retorno': 'Erro contatar TI'};
         })
-    })
-    
+    });
 
     await page.close();
     await browser.close();
