@@ -38,6 +38,8 @@ app.get('/:consulta/:uf', cors(corsOptions), async (req,res) => {
             navega = require('./controllers/detran/detranMS');
         }else if(uf == 'DF') {
             navega = require('./controllers/detran/detranDF');
+        }else if(uf == 'MT') {
+            navega = require('./controllers/detran/detranMT');
         }
     }else if(consulta == 'dividaAtiva') {
         if(uf == 'BA') {
