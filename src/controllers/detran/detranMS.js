@@ -90,13 +90,13 @@ const detranMS = async (placa, renavam) => {
         }).catch(() => {
             retornoMS = {
                 'status' : 0,
-                'mensagem': 'Sem retorno',
+                'mensagem': 'Consulta inválida',
             }
         });
     }).catch(()=>{
         retornoMS = {
             'status' : 0,
-            'mensagem': 'Sem retorno',
+            'mensagem': 'Site instável',
         }
     });
     await page.close();
