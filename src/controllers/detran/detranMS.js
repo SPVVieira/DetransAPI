@@ -80,7 +80,7 @@ const detranMS = async (placa, renavam) => {
                     'debitosVeiculo': objDebitos
                 }
             }).then((ret) => {
-                retornoMS = ret.debitosVeiculo;
+                retornoMS = ret;
             }).catch(() => {
                 retornoMS = {
                     'status' : 0,
