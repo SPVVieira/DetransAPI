@@ -278,7 +278,7 @@ const detranMT = async (placa, renavam) => {
             }
         }).catch(() => {
             retornoConsulta = {'status': 0, 'mensagem': 'Erro contatar TI', 'retorno': 'Erro contatar TI'};
-        })
+        });
     });
 
     await page.close();
