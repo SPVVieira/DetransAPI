@@ -66,8 +66,13 @@ const detranDF = async (placa, renavam) => {
         let rouboFurto = await document.querySelectorAll('input#RouboFurto')[0].value;
         let situacao = await document.querySelectorAll('input#SituacaoVeiculo')[0].value;
         let anoUltLic = await document.querySelectorAll('input#AnoUltimoLicenciamento')[0].value;
+        let restricoes = [];
+        if(document.querySelectorAll('input#AnoUltimoLicenciamento')[0] && document.querySelectorAll('input#AnoUltimoLicenciamento')[0].value != '') {
+            restricoes.push(document.querySelectorAll('input#restricoes')[0].value);
+        }
+        let anoUltLic = await document.querySelectorAll('input#AnoUltimoLicenciamento')[0].value;
 
-        let dadosVeiculo = {'placa': placa, 'renavam': renavam, 'chassi': chassi, 'marcaMod': marcaMod, 'cor': cor, 'anoFabMod': anoFabMod, 'tipo': tipo, 'combustivel': combustivel, 'potCilind': potCilind, 'categoria': categoria, 'capacidade': capacidade, 'especie': especie, 'nacionalidade': nacionalidade, 'municipio': municipio, 'rouboFurto': rouboFurto, 'situacao': situacao, 'anoUltLic': anoUltLic};
+        let dadosVeiculo = {'placa': placa, 'renavam': renavam, 'chassi': chassi, 'marcaMod': marcaMod, 'cor': cor, 'anoFabMod': anoFabMod, 'tipo': tipo, 'combustivel': combustivel, 'potCilind': potCilind, 'categoria': categoria, 'capacidade': capacidade, 'especie': especie, 'nacionalidade': nacionalidade, 'municipio': municipio, 'rouboFurto': rouboFurto, 'situacao': situacao, 'anoUltLic': anoUltLic, 'restricoes': restricoes};
 
         ////////////////////////////////////////////Informações licenciamento
         let dataMovimentacao = await document.querySelectorAll('input#DataMovimentacao')[0].value;
