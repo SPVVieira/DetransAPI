@@ -1,7 +1,7 @@
 {
   "name": "companyapi",
   "version": "1.0.0",
-  "description": "Automation for Company Conferi",
+  "description": "Automation for Detrans and Dividas ativas",
   "main": "./src/index.js",
   "scripts": {
     "start": "node src/index.js"
