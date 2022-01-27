@@ -4,7 +4,6 @@ const cors = require('cors');
 const app = express();
 
 var corsOptions = {
-    origin: ['179.188.51.20', '187.95.162.30'],
     optionsSuccessStatus: 200
 }
 
